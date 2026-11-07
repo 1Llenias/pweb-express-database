@@ -1,28 +1,11 @@
-# Tugas Pemrograman Website Express dan Backend
-
-## Requirements
-- Node.js
-- npm
-
-## Installation
-
-Install seluruh dependencies:
+## Setup Database
 
 ```bash
+cp .env.example .env
 npm install
+npx prisma migrate dev --name init
+npm run db:seed
 ```
-
-## Running the Application
-
-Jalankan development server:
-
-```bash
-npm run dev
-```
-
-Server berjalan pada:
-
-`http://localhost:3000`
 
 ## Available Endpoints
 
@@ -31,30 +14,21 @@ Server berjalan pada:
 | GET | /products | Get all products |
 | GET | /products/:id | Get product by ID |
 | POST | /products | Create a new product |
+| PUT | /products | Update product (id in body) |
+| PUT | /products/:id | Update product (id in URL) |
+| DELETE | /products/:id | Delete product by ID |
 
-## POST Request Example
-
-URL: `POST /products`
-
-Request Body:
-
-```json
-{
-  "name": "Laptop",
-  "price": 7500000
-}
-```
-
-Expected Response: `201 Created`
+## PUT Request Example
 
 ```json
 {
-  "id": 3,
-  "name": "Laptop",
-  "price": 7500000
+  "id": 1,
+  "name": "Buku Tulis",
+  "price": 18000
 }
 ```
 
 ## Data Storage
 
-Products are stored in an in-memory array. No database is used.
+Data disimpan di SQLite menggunakan Prisma ORM (`prisma/schema.prisma`).
+Lihat isi database dengan `npm run db:studio`.
